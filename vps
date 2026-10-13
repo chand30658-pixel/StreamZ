@@ -18,7 +18,7 @@
       "iconClass": "icon-windows"
     },
     {
-      "key": "",
+      "key": "linux",
       "label": "Server",
       "icon": "fa-brands fa-linux",
       "iconClass": "icon-linux"
