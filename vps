@@ -93,8 +93,8 @@
     {
       "id": "lin-1",
       "category": "linux",
-      "type": "LINUX VPS",
-      "brand": "DIAMOND VPS LINUX",
+      "type": "VPS",
+      "brand": "DIAMOND VPS",
       "subtitle": "Linux Server · Noida · Mumbai",
       "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": null,
