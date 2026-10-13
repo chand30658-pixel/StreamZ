@@ -35,231 +35,192 @@
       "id": "win-1",
       "category": "windows",
       "type": "WINDOWS VPS",
-      "brand": "ADVANCE NEW VPS",
+      "brand": "NEW DIAMOND VPS",
       "subtitle": "Windows Server",
-      "tag": { "text": "NEW", "class": "tag-new" },
+      "tag": { "text": "MOST DEMAND", "class": "tag-demand" },
       "os": [
         { "id": "o1", "name": "Win 2022", "icon": "fa-brands fa-windows" },
-        { "id": "o2", "name": "Win 2025", "icon": "fa-brands fa-windows" }
+        { "id": "o2", "name": "Win 2023", "icon": "fa-brands fa-windows" }
       ],
       "networks": [
-        { "id": "n1", "ip": "103.49", "end": "xx", "country": "India" },
-        { "id": "n2", "ip": "103.148", "end": "xx", "country": "India" },
-        { "id": "n3", "ip": "103.151", "end": "xx", "country": "India" },
-        { "id": "n4", "ip": "103.183", "end": "xx", "country": "India" },
-        { "id": "n5", "ip": "103.218", "end": "xx", "country": "India" },
-        { "id": "n6", "ip": "151.158", "end": "xx", "country": "India" },
-        { "id": "n7", "ip": "160.236", "end": "xx", "country": "India" },
-        { "id": "n8", "ip": "162.4", "end": "xx", "country": "India" },
-        { "id": "n9", "ip": "162.141", "end": "xx", "country": "India" },
-        { "id": "n10", "ip": "178.83", "end": "xx", "country": "India" },
-        { "id": "n11", "ip": "192.231", "end": "xx", "country": "India" },
-        { "id": "n12", "ip": "192.232", "end": "xx", "country": "India" },
-        { "id": "n13", "ip": "213.130", "end": "xx", "country": "India" }
+        { "id": "n1", "ip": "103.157", "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "157.15",  "end": "xx", "country": "India" },
+        { "id": "n3", "ip": "160.191", "end": "xx", "country": "India" },
+        { "id": "n4", "ip": "161.248", "end": "xx", "country": "India" },
+        { "id": "n5", "ip": "163.61",  "end": "xx", "country": "India" },
+        { "id": "n6", "ip": "163.227", "end": "xx", "country": "India" }
       ],
       "configs": [
-        { "id": "c1", "ram": "8", "price": 1289 }
+        { "id": "c1", "ram": "8",  "price": 1840 },
+        { "id": "c2", "ram": "16", "price": 2530 },
+        { "id": "c3", "ram": "32", "price": 4025 }
       ]
     },
     {
       "id": "win-2",
       "category": "windows",
       "type": "WINDOWS VPS",
-      "brand": "ADVANCE VPS",
+      "brand": "TITAN VPS",
       "subtitle": "Windows Server",
-      "tag": { "text": "18 IN STOCK", "class": "tag-stock" },
+      "tag": { "text": "NEW", "class": "tag-new" },
       "os": [
-        { "id": "o1", "name": "Win 2022", "icon": "fa-brands fa-windows" },
-        { "id": "o2", "name": "Win 2019", "icon": "fa-brands fa-windows" }
+        { "id": "o1", "name": "Win 2019", "icon": "fa-brands fa-windows" },
+        { "id": "o2", "name": "Win 2022", "icon": "fa-brands fa-windows" },
+        { "id": "o3", "name": "Win 2023", "icon": "fa-brands fa-windows" }
       ],
       "networks": [
-        { "id": "n1", "ip": "103.15", "end": "xx", "country": "India" },
-        { "id": "n2", "ip": "103.109", "end": "xx", "country": "India" },
-        { "id": "n3", "ip": "103.148", "end": "xx", "country": "India" },
-        { "id": "n4", "ip": "103.243", "end": "xx", "country": "India" },
-        { "id": "n5", "ip": "138.252", "end": "xx", "country": "India" },
-        { "id": "n6", "ip": "151.158", "end": "xx", "country": "India" },
-        { "id": "n7", "ip": "160.25", "end": "xx", "country": "India" },
-        { "id": "n8", "ip": "160.191", "end": "xx", "country": "India" },
-        { "id": "n9", "ip": "163.227", "end": "xx", "country": "India" },
-        { "id": "n10", "ip": "202.71", "end": "xx", "country": "India" }
+        { "id": "n1", "ip": "103.148", "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "103.87",  "end": "xx", "country": "India" },
+        { "id": "n3", "ip": "139.99",  "end": "xx", "country": "Singapore" }
       ],
       "configs": [
-        { "id": "c1", "ram": "8", "price": 1637 },
-        { "id": "c2", "ram": "16", "price": 2222 },
-        { "id": "c3", "ram": "32", "price": 3158 }
-      ]
-    },
-    {
-      "id": "lin-1",
-      "category": "linux",
-      "type": "LINUX VPS",
-      "brand": "DIAMOND VPS LINUX",
-      "subtitle": "Linux Server · Noida · Mumbai",
-      "tag": { "text": "BEST VALUE", "class": "tag-best" },
-      "os": null,
-      "networks": [
-        { "id": "n1", "ip": "103.129", "end": "xx", "country": "Noida" },
-        { "id": "n2", "ip": "103.151", "end": "xx", "country": "Mumbai" },
-        { "id": "n3", "ip": "160.191", "end": "xx", "country": "Noida" }
-      ],
-      "configs": [
-        { "id": "c1", "ram": "8", "price": 1394 }
+        { "id": "c1", "ram": "4",  "price": 899 },
+        { "id": "c2", "ram": "8",  "price": 1499 },
+        { "id": "c3", "ram": "16", "price": 2499 }
       ]
     },
     {
       "id": "win-3",
       "category": "windows",
       "type": "WINDOWS VPS",
-      "brand": "DIAMOND VPS WINDOWS",
-      "subtitle": "Windows Server · Mumbai · Noida",
+      "brand": "ORION HOST",
+      "subtitle": "Windows Server 2022",
+      "tag": null,
+      "os": null,
+      "networks": [
+        { "id": "n1", "ip": "139.99",  "end": "xx", "country": "Singapore" },
+        { "id": "n2", "ip": "104.156", "end": "xx", "country": "USA" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "8",  "price": 1699 },
+        { "id": "c2", "ram": "16", "price": 2899 },
+        { "id": "c3", "ram": "32", "price": 4499 }
+      ]
+    },
+    {
+      "id": "lin-1",
+      "category": "linux",
+      "type": "LINUX SERVER",
+      "brand": "PENGUIN CLOUD",
+      "subtitle": "Linux Server",
+      "tag": { "text": "BEST VALUE", "class": "tag-best" },
+      "os": [
+        { "id": "o1", "name": "Ubuntu 20.04", "icon": "fa-brands fa-linux" },
+        { "id": "o2", "name": "Debian 12",    "icon": "fa-brands fa-linux" },
+        { "id": "o3", "name": "CentOS 9",     "icon": "fa-brands fa-linux" }
+      ],
+      "networks": [
+        { "id": "n1", "ip": "103.49",  "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "103.148", "end": "xx", "country": "India" },
+        { "id": "n3", "ip": "49.12",   "end": "xx", "country": "Germany" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "2", "price": 299 },
+        { "id": "c2", "ram": "4", "price": 599 },
+        { "id": "c3", "ram": "8", "price": 1199 }
+      ]
+    },
+    {
+      "id": "lin-2",
+      "category": "linux",
+      "type": "LINUX SERVER",
+      "brand": "PENGUIN CLOUD",
+      "subtitle": "Linux Server",
+      "tag": null,
+      "os": [
+        { "id": "o1", "name": "Ubuntu 22.04", "icon": "fa-brands fa-linux" },
+        { "id": "o2", "name": "Debian 12",    "icon": "fa-brands fa-linux" }
+      ],
+      "networks": [
+        { "id": "n1", "ip": "104.156", "end": "xx", "country": "USA" },
+        { "id": "n2", "ip": "139.99",  "end": "xx", "country": "Singapore" },
+        { "id": "n3", "ip": "49.12",   "end": "xx", "country": "Germany" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "4",  "price": 699 },
+        { "id": "c2", "ram": "8",  "price": 1299 },
+        { "id": "c3", "ram": "16", "price": 2199 }
+      ]
+    },
+    {
+      "id": "lin-3",
+      "category": "linux",
+      "type": "LINUX SERVER",
+      "brand": "CORE LINUX",
+      "subtitle": "CentOS Stream 9",
       "tag": { "text": "HOT", "class": "tag-hot" },
       "os": null,
       "networks": [
-        { "id": "n1", "ip": "103.109", "end": "xx", "country": "Mumbai" },
-        { "id": "n2", "ip": "103.129", "end": "xx", "country": "Noida" },
-        { "id": "n3", "ip": "103.151", "end": "xx", "country": "Mumbai" },
-        { "id": "n4", "ip": "160.191", "end": "xx", "country": "Noida" }
+        { "id": "n1", "ip": "103.49", "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "103.87", "end": "xx", "country": "India" }
       ],
       "configs": [
-        { "id": "c1", "ram": "8", "price": 1356 }
+        { "id": "c1", "ram": "2", "price": 349 },
+        { "id": "c2", "ram": "4", "price": 649 },
+        { "id": "c3", "ram": "8", "price": 1099 }
       ]
     },
     {
-      "id": "win-4",
-      "category": "windows",
-      "type": "WINDOWS VPS",
-      "brand": "NEW DIAMOND VPS",
-      "subtitle": "Windows Server",
+      "id": "prem-1",
+      "category": "premium",
+      "type": "PREMIUM IP",
+      "brand": "DIAMOND PRO",
+      "subtitle": "Premium Dedicated IP",
       "tag": { "text": "MOST DEMAND", "class": "tag-demand" },
-      "os": null,
+      "os": [
+        { "id": "o1", "name": "Ubuntu 22.04", "icon": "fa-brands fa-linux" },
+        { "id": "o2", "name": "Win 2022",     "icon": "fa-brands fa-windows" }
+      ],
       "networks": [
         { "id": "n1", "ip": "103.157", "end": "xx", "country": "India" },
-        { "id": "n2", "ip": "157.15", "end": "xx", "country": "India" },
-        { "id": "n3", "ip": "160.191", "end": "xx", "country": "India" },
-        { "id": "n4", "ip": "161.248", "end": "xx", "country": "India" },
-        { "id": "n5", "ip": "163.61", "end": "xx", "country": "India" },
-        { "id": "n6", "ip": "163.227", "end": "xx", "country": "India" }
+        { "id": "n2", "ip": "157.15",  "end": "xx", "country": "India" },
+        { "id": "n3", "ip": "160.191", "end": "xx", "country": "India" }
       ],
       "configs": [
-        { "id": "c1", "ram": "8", "price": 1840 },
-        { "id": "c2", "ram": "16", "price": 2530 },
-        { "id": "c3", "ram": "32", "price": 4025 }
+        { "id": "c1", "ram": "8",  "price": 2499 },
+        { "id": "c2", "ram": "16", "price": 3999 },
+        { "id": "c3", "ram": "32", "price": 6499 }
       ]
     },
     {
-      "id": "win-5",
-      "category": "windows",
-      "type": "WINDOWS VPS",
-      "brand": "OCEAN VPS",
-      "subtitle": "Windows Server",
-      "tag": { "text": "BUDGET", "class": "tag-budget" },
+      "id": "prem-2",
+      "category": "premium",
+      "type": "PREMIUM IP",
+      "brand": "ELITE NETWORK",
+      "subtitle": "Premium Dedicated IP",
+      "tag": { "text": "LIMITED", "class": "tag-limited" },
       "os": null,
       "networks": [
-        { "id": "n1", "ip": "43.225.74", "end": "", "country": "India" },
-        { "id": "n2", "ip": "43.240.4", "end": "", "country": "India" },
-        { "id": "n3", "ip": "103.47", "end": "x", "country": "India" },
-        { "id": "n4", "ip": "103.54.26", "end": "", "country": "India" },
-        { "id": "n5", "ip": "103.85.118", "end": "", "country": "India" },
-        { "id": "n6", "ip": "103.93.17", "end": "x", "country": "India" },
-        { "id": "n7", "ip": "103.93.213", "end": "", "country": "India" },
-        { "id": "n8", "ip": "103.101", "end": "xx", "country": "India" },
-        { "id": "n9", "ip": "103.181.91", "end": "", "country": "India" },
-        { "id": "n10", "ip": "103.182.44", "end": "", "country": "India" },
-        { "id": "n11", "ip": "103.186.44", "end": "", "country": "India" },
-        { "id": "n12", "ip": "103.189.147", "end": "", "country": "India" },
-        { "id": "n13", "ip": "103.195", "end": "xx", "country": "India" },
-        { "id": "n14", "ip": "103.204.170", "end": "", "country": "India" },
-        { "id": "n15", "ip": "103.225", "end": "xx", "country": "India" },
-        { "id": "n16", "ip": "103.227", "end": "xx", "country": "India" }
+        { "id": "n1", "ip": "139.99",  "end": "xx", "country": "Singapore" },
+        { "id": "n2", "ip": "104.156", "end": "xx", "country": "USA" },
+        { "id": "n3", "ip": "49.12",   "end": "xx", "country": "Germany" }
       ],
       "configs": [
-        { "id": "c1", "ram": "8", "price": 995 },
-        { "id": "c2", "ram": "16", "price": 1463 },
-        { "id": "c3", "ram": "32", "price": 2223 }
+        { "id": "c1", "ram": "8",  "price": 2899 },
+        { "id": "c2", "ram": "16", "price": 4299 },
+        { "id": "c3", "ram": "32", "price": 6999 }
       ]
     },
     {
-      "id": "win-6",
-      "category": "windows",
-      "type": "WINDOWS VPS",
-      "brand": "OCEAN VPS DIAMOND",
-      "subtitle": "Windows Server",
-      "tag": { "text": "PREMIUM", "class": "tag-premium" },
-      "os": null,
-      "networks": [
-        { "id": "n1", "ip": "103.184", "end": "xx", "country": "India" }
-      ],
-      "configs": [
-        { "id": "c1", "ram": "16", "price": 2808 },
-        { "id": "c2", "ram": "32", "price": 3276 }
-      ]
-    },
-    {
-      "id": "win-7",
-      "category": "windows",
-      "type": "WINDOWS VPS",
-      "brand": "OCEAN VPS GOLD",
-      "subtitle": "Windows Server",
-      "tag": { "text": "POPULAR", "class": "tag-popular" },
-      "os": null,
-      "networks": [
-        { "id": "n1", "ip": "103.54", "end": "xx", "country": "India" },
-        { "id": "n2", "ip": "103.82.72", "end": "", "country": "India" },
-        { "id": "n3", "ip": "103.87", "end": "xx", "country": "India" },
-        { "id": "n4", "ip": "149.5", "end": "xx", "country": "India" }
-      ],
-      "configs": [
-        { "id": "c1", "ram": "8", "price": 1404 },
-        { "id": "c2", "ram": "16", "price": 2223 },
-        { "id": "c3", "ram": "32", "price": 2925 }
-      ]
-    },
-    {
-      "id": "win-8",
-      "category": "windows",
-      "type": "WINDOWS VPS",
-      "brand": "PRIME VPS",
-      "subtitle": "Windows Server",
-      "tag": { "text": "FAST", "class": "tag-fast" },
+      "id": "prem-3",
+      "category": "premium",
+      "type": "PREMIUM IP",
+      "brand": "SUPER RESIDENTIAL",
+      "subtitle": "Super Clean Residential IP",
+      "tag": { "text": "NEW", "class": "tag-new" },
       "os": [
-        { "id": "o1", "name": "Win 2022", "icon": "fa-brands fa-windows" },
-        { "id": "o2", "name": "Win 2019", "icon": "fa-brands fa-windows" }
+        { "id": "o1", "name": "Ubuntu 22.04", "icon": "fa-brands fa-linux" },
+        { "id": "o2", "name": "Debian 12",    "icon": "fa-brands fa-linux" },
+        { "id": "o3", "name": "Win 2022",     "icon": "fa-brands fa-windows" }
       ],
       "networks": [
-        { "id": "n1", "ip": "77.107", "end": "xx", "country": "India" },
-        { "id": "n2", "ip": "138.252", "end": "xx", "country": "India" },
-        { "id": "n3", "ip": "162.4", "end": "xx", "country": "India" },
-        { "id": "n4", "ip": "163.5", "end": "xx", "country": "India" },
-        { "id": "n5", "ip": "213.109", "end": "xx", "country": "India" }
+        { "id": "n1", "ip": "103.87",  "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "161.248", "end": "xx", "country": "India" }
       ],
       "configs": [
-        { "id": "c1", "ram": "8", "price": 1400 }
-      ]
-    },
-    {
-      "id": "win-9",
-      "category": "windows",
-      "type": "WINDOWS VPS",
-      "brand": "START VPS",
-      "subtitle": "Windows Server",
-      "tag": { "text": "STARTER", "class": "tag-starter" },
-      "os": [
-        { "id": "o1", "name": "Win 2022", "icon": "fa-brands fa-windows" },
-        { "id": "o2", "name": "Win 2019", "icon": "fa-brands fa-windows" }
-      ],
-      "networks": [
-        { "id": "n1", "ip": "2.27", "end": "xx", "country": "India" },
-        { "id": "n2", "ip": "103.98", "end": "xx", "country": "India" },
-        { "id": "n3", "ip": "103.163", "end": "xx", "country": "India" },
-        { "id": "n4", "ip": "103.178", "end": "xx", "country": "India" },
-        { "id": "n5", "ip": "138.252", "end": "xx", "country": "India" },
-        { "id": "n6", "ip": "163.61", "end": "xx", "country": "India" },
-        { "id": "n7", "ip": "178.92", "end": "xx", "country": "India" },
-        { "id": "n8", "ip": "213.210", "end": "xx", "country": "India" }
-      ],
-      "configs": [
-        { "id": "c1", "ram": "8", "price": 1350 }
+        { "id": "c1", "ram": "4",  "price": 1899 },
+        { "id": "c2", "ram": "8",  "price": 2999 },
+        { "id": "c3", "ram": "16", "price": 4999 }
       ]
     }
   ]
