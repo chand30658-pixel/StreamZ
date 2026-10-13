@@ -33,7 +33,6 @@
   "plans": [
     {
       "id": "win-1",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "ADVANCE NEW VPS",
       "subtitle": "Windows Server",
@@ -63,7 +62,6 @@
     },
     {
       "id": "win-2",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "ADVANCE VPS",
       "subtitle": "Windows Server",
@@ -92,7 +90,6 @@
     },
     {
       "id": "lin-1",
-      "category": "linux",
       "type": "VPS",
       "brand": "DIAMOND VPS",
       "subtitle": "Server · Noida · Mumbai",
@@ -109,7 +106,6 @@
     },
     {
       "id": "win-3",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "DIAMOND VPS WINDOWS",
       "subtitle": "Windows Server · Mumbai · Noida",
@@ -127,7 +123,6 @@
     },
     {
       "id": "win-4",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "NEW DIAMOND VPS",
       "subtitle": "Windows Server",
@@ -149,7 +144,6 @@
     },
     {
       "id": "win-5",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "OCEAN VPS",
       "subtitle": "Windows Server",
@@ -181,7 +175,6 @@
     },
     {
       "id": "win-6",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "OCEAN VPS DIAMOND",
       "subtitle": "Windows Server",
@@ -197,7 +190,6 @@
     },
     {
       "id": "win-7",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "OCEAN VPS GOLD",
       "subtitle": "Windows Server",
@@ -217,7 +209,6 @@
     },
     {
       "id": "win-8",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "PRIME VPS",
       "subtitle": "Windows Server",
@@ -239,7 +230,6 @@
     },
     {
       "id": "win-9",
-      "category": "windows",
       "type": "WINDOWS VPS",
       "brand": "START VPS",
       "subtitle": "Windows Server",
