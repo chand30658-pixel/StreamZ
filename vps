@@ -18,8 +18,8 @@
       "iconClass": "icon-windows"
     },
     {
-      "key": "linux",
-      "label": "Linux Server",
+      "key": "",
+      "label": "Server",
       "icon": "fa-brands fa-linux",
       "iconClass": "icon-linux"
     },
@@ -95,7 +95,7 @@
       "category": "linux",
       "type": "VPS",
       "brand": "DIAMOND VPS",
-      "subtitle": "Linux Server · Noida · Mumbai",
+      "subtitle": "Server · Noida · Mumbai",
       "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": null,
       "networks": [
