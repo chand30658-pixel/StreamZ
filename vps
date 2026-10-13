@@ -1,0 +1,227 @@
+{
+  "config": {
+    "whatsapp_number": "918595504679",
+    "brand_name": "CloudHost",
+    "brand_sub": "Premium VPS Hosting"
+  },
+  "filters": [
+    {
+      "key": "all",
+      "label": "All",
+      "icon": "fa-solid fa-layer-group",
+      "iconClass": "icon-all"
+    },
+    {
+      "key": "windows",
+      "label": "Windows VPS",
+      "icon": "fa-brands fa-windows",
+      "iconClass": "icon-windows"
+    },
+    {
+      "key": "linux",
+      "label": "Linux Server",
+      "icon": "fa-brands fa-linux",
+      "iconClass": "icon-linux"
+    },
+    {
+      "key": "premium",
+      "label": "Premium IP",
+      "icon": "fa-solid fa-crown",
+      "iconClass": "icon-premium"
+    }
+  ],
+  "plans": [
+    {
+      "id": "win-1",
+      "category": "windows",
+      "type": "WINDOWS VPS",
+      "brand": "NEW DIAMOND VPS",
+      "subtitle": "Windows Server",
+      "tag": { "text": "MOST DEMAND", "class": "tag-demand" },
+      "os": [
+        { "id": "o1", "name": "Win 2022", "icon": "fa-brands fa-windows" },
+        { "id": "o2", "name": "Win 2023", "icon": "fa-brands fa-windows" }
+      ],
+      "networks": [
+        { "id": "n1", "ip": "103.157", "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "157.15",  "end": "xx", "country": "India" },
+        { "id": "n3", "ip": "160.191", "end": "xx", "country": "India" },
+        { "id": "n4", "ip": "161.248", "end": "xx", "country": "India" },
+        { "id": "n5", "ip": "163.61",  "end": "xx", "country": "India" },
+        { "id": "n6", "ip": "163.227", "end": "xx", "country": "India" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "8",  "price": 1840 },
+        { "id": "c2", "ram": "16", "price": 2530 },
+        { "id": "c3", "ram": "32", "price": 4025 }
+      ]
+    },
+    {
+      "id": "win-2",
+      "category": "windows",
+      "type": "WINDOWS VPS",
+      "brand": "TITAN VPS",
+      "subtitle": "Windows Server",
+      "tag": { "text": "NEW", "class": "tag-new" },
+      "os": [
+        { "id": "o1", "name": "Win 2019", "icon": "fa-brands fa-windows" },
+        { "id": "o2", "name": "Win 2022", "icon": "fa-brands fa-windows" },
+        { "id": "o3", "name": "Win 2023", "icon": "fa-brands fa-windows" }
+      ],
+      "networks": [
+        { "id": "n1", "ip": "103.148", "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "103.87",  "end": "xx", "country": "India" },
+        { "id": "n3", "ip": "139.99",  "end": "xx", "country": "Singapore" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "4",  "price": 899 },
+        { "id": "c2", "ram": "8",  "price": 1499 },
+        { "id": "c3", "ram": "16", "price": 2499 }
+      ]
+    },
+    {
+      "id": "win-3",
+      "category": "windows",
+      "type": "WINDOWS VPS",
+      "brand": "ORION HOST",
+      "subtitle": "Windows Server 2022",
+      "tag": null,
+      "os": null,
+      "networks": [
+        { "id": "n1", "ip": "139.99",  "end": "xx", "country": "Singapore" },
+        { "id": "n2", "ip": "104.156", "end": "xx", "country": "USA" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "8",  "price": 1699 },
+        { "id": "c2", "ram": "16", "price": 2899 },
+        { "id": "c3", "ram": "32", "price": 4499 }
+      ]
+    },
+    {
+      "id": "lin-1",
+      "category": "linux",
+      "type": "LINUX SERVER",
+      "brand": "PENGUIN CLOUD",
+      "subtitle": "Linux Server",
+      "tag": { "text": "BEST VALUE", "class": "tag-best" },
+      "os": [
+        { "id": "o1", "name": "Ubuntu 20.04", "icon": "fa-brands fa-linux" },
+        { "id": "o2", "name": "Debian 12",    "icon": "fa-brands fa-linux" },
+        { "id": "o3", "name": "CentOS 9",     "icon": "fa-brands fa-linux" }
+      ],
+      "networks": [
+        { "id": "n1", "ip": "103.49",  "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "103.148", "end": "xx", "country": "India" },
+        { "id": "n3", "ip": "49.12",   "end": "xx", "country": "Germany" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "2", "price": 299 },
+        { "id": "c2", "ram": "4", "price": 599 },
+        { "id": "c3", "ram": "8", "price": 1199 }
+      ]
+    },
+    {
+      "id": "lin-2",
+      "category": "linux",
+      "type": "LINUX SERVER",
+      "brand": "PENGUIN CLOUD",
+      "subtitle": "Linux Server",
+      "tag": null,
+      "os": [
+        { "id": "o1", "name": "Ubuntu 22.04", "icon": "fa-brands fa-linux" },
+        { "id": "o2", "name": "Debian 12",    "icon": "fa-brands fa-linux" }
+      ],
+      "networks": [
+        { "id": "n1", "ip": "104.156", "end": "xx", "country": "USA" },
+        { "id": "n2", "ip": "139.99",  "end": "xx", "country": "Singapore" },
+        { "id": "n3", "ip": "49.12",   "end": "xx", "country": "Germany" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "4",  "price": 699 },
+        { "id": "c2", "ram": "8",  "price": 1299 },
+        { "id": "c3", "ram": "16", "price": 2199 }
+      ]
+    },
+    {
+      "id": "lin-3",
+      "category": "linux",
+      "type": "LINUX SERVER",
+      "brand": "CORE LINUX",
+      "subtitle": "CentOS Stream 9",
+      "tag": { "text": "HOT", "class": "tag-hot" },
+      "os": null,
+      "networks": [
+        { "id": "n1", "ip": "103.49", "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "103.87", "end": "xx", "country": "India" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "2", "price": 349 },
+        { "id": "c2", "ram": "4", "price": 649 },
+        { "id": "c3", "ram": "8", "price": 1099 }
+      ]
+    },
+    {
+      "id": "prem-1",
+      "category": "premium",
+      "type": "PREMIUM IP",
+      "brand": "DIAMOND PRO",
+      "subtitle": "Premium Dedicated IP",
+      "tag": { "text": "MOST DEMAND", "class": "tag-demand" },
+      "os": [
+        { "id": "o1", "name": "Ubuntu 22.04", "icon": "fa-brands fa-linux" },
+        { "id": "o2", "name": "Win 2022",     "icon": "fa-brands fa-windows" }
+      ],
+      "networks": [
+        { "id": "n1", "ip": "103.157", "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "157.15",  "end": "xx", "country": "India" },
+        { "id": "n3", "ip": "160.191", "end": "xx", "country": "India" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "8",  "price": 2499 },
+        { "id": "c2", "ram": "16", "price": 3999 },
+        { "id": "c3", "ram": "32", "price": 6499 }
+      ]
+    },
+    {
+      "id": "prem-2",
+      "category": "premium",
+      "type": "PREMIUM IP",
+      "brand": "ELITE NETWORK",
+      "subtitle": "Premium Dedicated IP",
+      "tag": { "text": "LIMITED", "class": "tag-limited" },
+      "os": null,
+      "networks": [
+        { "id": "n1", "ip": "139.99",  "end": "xx", "country": "Singapore" },
+        { "id": "n2", "ip": "104.156", "end": "xx", "country": "USA" },
+        { "id": "n3", "ip": "49.12",   "end": "xx", "country": "Germany" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "8",  "price": 2899 },
+        { "id": "c2", "ram": "16", "price": 4299 },
+        { "id": "c3", "ram": "32", "price": 6999 }
+      ]
+    },
+    {
+      "id": "prem-3",
+      "category": "premium",
+      "type": "PREMIUM IP",
+      "brand": "SUPER RESIDENTIAL",
+      "subtitle": "Super Clean Residential IP",
+      "tag": { "text": "NEW", "class": "tag-new" },
+      "os": [
+        { "id": "o1", "name": "Ubuntu 22.04", "icon": "fa-brands fa-linux" },
+        { "id": "o2", "name": "Debian 12",    "icon": "fa-brands fa-linux" },
+        { "id": "o3", "name": "Win 2022",     "icon": "fa-brands fa-windows" }
+      ],
+      "networks": [
+        { "id": "n1", "ip": "103.87",  "end": "xx", "country": "India" },
+        { "id": "n2", "ip": "161.248", "end": "xx", "country": "India" }
+      ],
+      "configs": [
+        { "id": "c1", "ram": "4",  "price": 1899 },
+        { "id": "c2", "ram": "8",  "price": 2999 },
+        { "id": "c3", "ram": "16", "price": 4999 }
+      ]
+    }
+  ]
+}
