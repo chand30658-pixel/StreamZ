@@ -37,7 +37,7 @@
       "type": "WINDOWS VPS",
       "brand": "ADVANCE NEW VPS",
       "subtitle": "Windows Server",
-      "tag": { "text": "NEW", "class": "tag-new" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": [
         { "id": "o1", "name": "Win 2022", "icon": "fa-brands fa-windows" },
         { "id": "o2", "name": "Win 2025", "icon": "fa-brands fa-windows" }
@@ -96,7 +96,7 @@
       "type": "LINUX VPS",
       "brand": "DIAMOND VPS LINUX",
       "subtitle": "Linux Server · Noida · Mumbai",
-      "tag": { "text": "BEST VALUE", "class": "tag-best" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": null,
       "networks": [
         { "id": "n1", "ip": "103.129", "end": "xx", "country": "Noida" },
@@ -113,7 +113,7 @@
       "type": "WINDOWS VPS",
       "brand": "DIAMOND VPS WINDOWS",
       "subtitle": "Windows Server · Mumbai · Noida",
-      "tag": { "text": "HOT", "class": "tag-hot" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": null,
       "networks": [
         { "id": "n1", "ip": "103.109", "end": "xx", "country": "Mumbai" },
@@ -131,7 +131,7 @@
       "type": "WINDOWS VPS",
       "brand": "NEW DIAMOND VPS",
       "subtitle": "Windows Server",
-      "tag": { "text": "MOST DEMAND", "class": "tag-demand" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": null,
       "networks": [
         { "id": "n1", "ip": "103.157", "end": "xx", "country": "India" },
@@ -153,7 +153,7 @@
       "type": "WINDOWS VPS",
       "brand": "OCEAN VPS",
       "subtitle": "Windows Server",
-      "tag": { "text": "BUDGET", "class": "tag-budget" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": null,
       "networks": [
         { "id": "n1", "ip": "43.225.74", "end": "", "country": "India" },
@@ -185,7 +185,7 @@
       "type": "WINDOWS VPS",
       "brand": "OCEAN VPS DIAMOND",
       "subtitle": "Windows Server",
-      "tag": { "text": "PREMIUM", "class": "tag-premium" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": null,
       "networks": [
         { "id": "n1", "ip": "103.184", "end": "xx", "country": "India" }
@@ -201,7 +201,7 @@
       "type": "WINDOWS VPS",
       "brand": "OCEAN VPS GOLD",
       "subtitle": "Windows Server",
-      "tag": { "text": "POPULAR", "class": "tag-popular" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": null,
       "networks": [
         { "id": "n1", "ip": "103.54", "end": "xx", "country": "India" },
@@ -221,7 +221,7 @@
       "type": "WINDOWS VPS",
       "brand": "PRIME VPS",
       "subtitle": "Windows Server",
-      "tag": { "text": "FAST", "class": "tag-fast" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": [
         { "id": "o1", "name": "Win 2022", "icon": "fa-brands fa-windows" },
         { "id": "o2", "name": "Win 2019", "icon": "fa-brands fa-windows" }
@@ -243,7 +243,7 @@
       "type": "WINDOWS VPS",
       "brand": "START VPS",
       "subtitle": "Windows Server",
-      "tag": { "text": "STARTER", "class": "tag-starter" },
+      "tag": { "text": "AVAILABLE", "class": "tag-available" },
       "os": [
         { "id": "o1", "name": "Win 2022", "icon": "fa-brands fa-windows" },
         { "id": "o2", "name": "Win 2019", "icon": "fa-brands fa-windows" }
