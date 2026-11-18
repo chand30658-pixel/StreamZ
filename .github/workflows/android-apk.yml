@@ -1,0 +1,91 @@
+name: StreamZ Android APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: streamz-android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-release-apk:
+    name: Build and publish APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Show tool versions
+        run: |
+          flutter --version
+          java -version
+          flutter doctor -v
+
+      - name: Install Gradle
+        run: |
+          curl -fsSL https://services.gradle.org/distributions/gradle-8.11.1-bin.zip -o /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp/gradle
+          echo "/tmp/gradle/gradle-8.11.1/bin" >> "$GITHUB_PATH"
+          gradle --version
+
+      - name: Generate Android Gradle wrapper
+        working-directory: android
+        run: gradle wrapper --gradle-version 8.11.1
+
+      - name: Get Flutter packages
+        run: flutter pub get
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Prepare release APK
+        id: apk
+        run: |
+          mkdir -p release
+          cp build/app/outputs/flutter-apk/app-release.apk release/StreamZ-TV-release.apk
+          echo "size=$(du -h release/StreamZ-TV-release.apk | cut -f1)" >> "$GITHUB_OUTPUT"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: StreamZ-TV-apk-${{ github.run_number }}
+          path: release/StreamZ-TV-release.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="v1.0.0-build.${{ github.run_number }}"
+          TITLE="StreamZ TV build ${{ github.run_number }}"
+          gh release create "$TAG" release/StreamZ-TV-release.apk \
+            --title "$TITLE" \
+            --prerelease \
+            --generate-notes \
+            --notes "Automated Android TV APK build from main.
+
+Commit: ${{ github.sha }}
+APK size: ${{ steps.apk.outputs.size }}
+
+Install the APK on an Android TV / Google TV device for testing."
+
