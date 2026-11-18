@@ -6,10 +6,12 @@ import 'package:intl/intl.dart';
 import '../models.dart';
 import '../services/jio_api.dart';
 import '../theme.dart';
+import 'startup_guide_overlay.dart';
 
 class PlayerScreen extends StatefulWidget {
-  const PlayerScreen({super.key, required this.api});
+  const PlayerScreen({super.key, required this.api, this.initialGuide = false});
   final JioApi api;
+  final bool initialGuide;
   @override State<PlayerScreen> createState() => _PlayerScreenState();
 }
 
@@ -29,6 +31,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
   bool _banner = true, _keypad = false, _settings = false, _searchMode = false, _muted = false;
   int _aspect = 0, _settingsTab = 0;
   bool _loading = true;
+  bool _guideOpen = false;
+  final Map<int, List<TvProgram>> _guidePrograms = {};
 
   TvChannel? get _channel => _channels.isEmpty ? null : _channels[_index.clamp(0, _channels.length - 1)];
   TvProgram? get _liveProgram {
@@ -53,7 +57,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
       final channels = await widget.api.loadChannels();
       if (!mounted) return;
       setState(() { _channels = channels; _loading = false; });
-      if (channels.isNotEmpty) await _tune(0);
+      if (channels.isNotEmpty) {
+        await _tune(0);
+        await _loadGuidePrograms(channels.take(16).toList());
+      }
     } catch (e) {
       if (mounted) setState(() { _loading = false; _error = 'Unable to load channels: $e'; });
     }
@@ -81,6 +88,29 @@ class _PlayerScreenState extends State<PlayerScreen> {
     } catch (e) {
       if (mounted && _channel?.id == channel.id) setState(() => _error = _friendlyError(e));
     }
+  }
+
+  Future<void> _loadGuidePrograms(List<TvChannel> channels) async {
+    final results = await Future.wait(channels.map((channel) async {
+      try {
+        return MapEntry(channel.id, await widget.api.getEpg(channel.id));
+      } catch (_) {
+        return MapEntry(channel.id, <TvProgram>[]);
+      }
+    }));
+    if (!mounted) return;
+    setState(() {
+      for (final entry in results) {
+        _guidePrograms[entry.key] = entry.value;
+      }
+    });
+  }
+
+  void _selectGuideChannel(TvChannel channel) {
+    final index = _channels.indexWhere((c) => c.id == channel.id);
+    if (index < 0) return;
+    setState(() => _guideOpen = false);
+    _tune(index);
   }
 
   String _friendlyError(Object e) {
@@ -210,6 +240,16 @@ class _PlayerScreenState extends State<PlayerScreen> {
             if (_error != null) _buildError(),
             if (_settings) _buildSettings(),
             if (_searchMode) _buildSearch(),
+            if (_guideOpen && _channels.isNotEmpty)
+              StartupGuideOverlay(
+                channels: _channels,
+                programs: _guidePrograms,
+                onSelect: _selectGuideChannel,
+                onClose: () {
+                  setState(() => _guideOpen = false);
+                  _armHide();
+                },
+              ),
           ]),
         ),
       ),
