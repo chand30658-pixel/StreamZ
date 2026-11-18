@@ -41,3 +41,7 @@ Automated CI builds are configured on the main branch. Every successful main pus
 - Enter / Center: commit dial or toggle OSD
 - Back: close modal, keypad, OSD, then exit
 - 0000: live-only channel search
+
+
+## Build status
+APK builds are produced from `main` by GitHub Actions.
