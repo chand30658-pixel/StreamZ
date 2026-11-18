@@ -31,6 +31,8 @@ The playback layer is generic: it can consume an authorized HLS/DASH source, HTT
 
 flutter build apk --release --dart-define=JIO_API_KEY=YOUR_KEY --dart-define=JIO_APP_KEY=YOUR_APP_KEY
 
+Automated CI builds are configured on the main branch. Every successful main push produces a test APK workflow artifact and a prerelease GitHub Release asset.
+
 ## TV controls
 
 - 0-9: channel dial
