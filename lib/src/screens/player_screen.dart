@@ -66,11 +66,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
     _player?.dispose(); _player = null;
 
     try {
-      if (channel.playbackUrl == null) {
-        throw StateError('No authorized playback source is configured for channel ${channel.id}.');
+      final resolved = await widget.api.resolvePlayback(channel);
+      if (resolved.playbackUrl == null) {
+        throw StateError('No playable source is available for channel ${channel.id}.');
       }
-      final drm = channel.clearKeyJson == null ? null : DrmConfiguration(
-        drmType: DrmType.clearKey, clearKey: channel.clearKeyJson,
+      final drm = resolved.clearKeyJson == null ? null : DrmConfiguration(
+        drmType: DrmType.clearKey, clearKey: resolved.clearKeyJson,
       );
       final controller = BetterPlayerController(
         const BetterPlayerConfiguration(
@@ -79,8 +80,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
           handleLifecycle: true, autoDispose: false,
         ),
         betterPlayerDataSource: BetterPlayerDataSource(
-          DataSourceType.network, channel.playbackUrl!, liveStream: true,
-          headers: {'Accept': '*/*', ...channel.playbackHeaders},
+          DataSourceType.network, resolved.playbackUrl!, liveStream: true,
+          headers: {'Accept': '*/*', ...resolved.playbackHeaders},
           drmConfiguration: drm, useAsmsTracks: true, useAsmsAudioTracks: true,
         ),
       );
