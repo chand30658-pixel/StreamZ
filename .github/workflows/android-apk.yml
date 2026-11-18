@@ -34,5 +34,10 @@ jobs:
           echo "Searching Android project for legacy Flutter v1 embedding markers..."
           grep -RInE 'io\.flutter\.app|FlutterApplication|FlutterActivity' android || true
 
+      - name: Check dependency embedding
+        run: |
+          echo "Searching pub cache for legacy Flutter v1 Android embedding..."
+          grep -RInE 'io\.flutter\.app|FlutterApplication|io\.flutter\.plugin\.common\.PluginRegistry' "$HOME/.pub-cache/hosted/pub.dev" 2>/dev/null | head -100 || true
+
       - name: Build APK
         run: flutter build apk --release --build-number=${{ github.run_number }}
