@@ -23,11 +23,11 @@ import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import java.util.UUID
 
-class StreamzPlayerViewFactory : PlatformViewFactory(null) {
+class StreamzPlayerViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(null) {
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         @Suppress("UNCHECKED_CAST")
         val params = args as? Map<String, Any?> ?: emptyMap()
-        return StreamzPlayerView(context, viewId, params)
+        return StreamzPlayerView(context, viewId, params, messenger)
     }
 }
 
@@ -35,7 +35,8 @@ class StreamzPlayerViewFactory : PlatformViewFactory(null) {
 class StreamzPlayerView(
     context: Context,
     private val viewId: Int,
-    private val params: Map<String, Any?>
+    private val params: Map<String, Any?>,
+    messenger: BinaryMessenger
 ) : PlatformView {
 
     private val root = FrameLayout(context).apply {
@@ -43,7 +44,7 @@ class StreamzPlayerView(
     }
     private val playerView = PlayerView(context)
     private val channel = MethodChannel(
-        StreamzPluginMessenger.messenger ?: error("Flutter messenger not initialized"),
+        messenger,
         "streamz-exoplayer/$viewId"
     )
     private var player: ExoPlayer? = null
