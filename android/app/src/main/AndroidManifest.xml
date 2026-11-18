@@ -9,6 +9,9 @@
         android:theme="@style/LaunchTheme"
         android:usesCleartextTraffic="false"
         android:resizeableActivity="true">
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
