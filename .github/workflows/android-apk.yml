@@ -23,21 +23,30 @@ jobs:
           echo "$HOME/flutter/bin" >> "$GITHUB_PATH"
           "$HOME/flutter/bin/flutter" --version
 
-      - name: Restore Android tooling
-        run: flutter create --platforms=android --project-name=streamz_tv --no-pub .
+      - name: Prepare Android Gradle wrapper
+        run: |
+          echo "flutter.sdk=$HOME/flutter" > android/local.properties
+          curl -fsSL https://services.gradle.org/distributions/gradle-8.11.1-bin.zip -o /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp/gradle
+          echo "/tmp/gradle/gradle-8.11.1/bin" >> "$GITHUB_PATH"
+          cd android
+          gradle wrapper --gradle-version 8.11.1
+          test -f gradlew
+          test -f gradle/wrapper/gradle-wrapper.properties
 
       - name: Get packages
         run: flutter pub get
 
       - name: Check Android embedding
         run: |
-          echo "Searching Android project for legacy Flutter v1 embedding markers..."
-          grep -RInE 'io\.flutter\.app|FlutterApplication|FlutterActivity' android || true
+          echo "Checking host Android activity and manifest..."
+          grep -RInE 'io\.flutter\.app|FlutterApplication|io\.flutter\.plugin\.common\.PluginRegistry' android 2>/dev/null || true
 
       - name: Check dependency embedding
         run: |
           echo "Searching pub cache for legacy Flutter v1 Android embedding..."
           grep -RInE 'io\.flutter\.app|FlutterApplication|io\.flutter\.plugin\.common\.PluginRegistry' "$HOME/.pub-cache/hosted/pub.dev" 2>/dev/null | head -100 || true
-
-      - name: Build APK
-        run: flutter build apk --release --build-number=${{ github.run_number }}
+      - name: Build APK with Gradle
+        run: |
+          cd android
+          ./gradlew assembleRelease -Pflutter.versionCode=${{ github.run_number }} -Pflutter.versionName=1.0.0
