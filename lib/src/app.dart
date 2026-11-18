@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/guide_screen.dart';
+import 'screens/player_screen.dart';
 import 'services/jio_api.dart';
 import 'theme.dart';
 
@@ -14,7 +14,7 @@ class StreamzTvApp extends StatelessWidget {
       title: 'StreamZ TV',
       debugShowCheckedModeBanner: false,
       theme: buildTvTheme(),
-      home: GuideScreen(api: api),
+      home: PlayerScreen(api: api, initialGuide: true),
     );
   }
 }
