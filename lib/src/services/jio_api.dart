@@ -13,6 +13,11 @@ class JioApi {
       'https://jiotv.data.cdn.jio.com/apis/v1.3/getepg/get';
   static const _extraFeed =
       'https://api.npoint.io/9db02feba76eb297fc65?v=1794981838621';
+  static const _workerResolver =
+      'https://eliteapiyash.streamxlive.workers.dev';
+  static const _mobileChromeUa =
+      'Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 '
+      '(KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36';
 
   final http.Client _client = http.Client();
 
@@ -278,6 +283,140 @@ class JioApi {
     }
     if (value.isEmpty) return null;
     return value.replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '');
+  }
+
+  Future<TvChannel> resolvePlayback(TvChannel channel) async {
+    if (channel.id >= 1000000 || channel.playbackUrl != null) {
+      return channel;
+    }
+
+    try {
+      final uri = Uri.parse(_workerResolver).replace(
+        queryParameters: {'id': '${channel.id}'},
+      );
+      final response = await _client.get(
+        uri,
+        headers: {
+          'User-Agent': _mobileChromeUa,
+          'Accept': 'application/json,text/plain,*/*',
+        },
+      );
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        throw Exception('Worker HTTP ${response.statusCode}');
+      }
+
+      final decoded = jsonDecode(response.body);
+      final data = _firstMap(decoded);
+      if (data == null) {
+        throw const FormatException('Worker returned no playback object');
+      }
+
+      final source = _extractWorkerSource(data);
+      if (source == null) {
+        throw const FormatException('Worker returned no playable URL');
+      }
+
+      return channel.copyWith(
+        playbackUrl: source.url,
+        playbackHeaders: source.headers,
+        clearKeyJson: source.clearKeyJson,
+      );
+    } catch (_) {
+      return channel;
+    }
+  }
+
+  Map<String, dynamic>? _firstMap(dynamic value) {
+    if (value is Map) return Map<String, dynamic>.from(value);
+    if (value is List) {
+      for (final item in value) {
+        if (item is Map) return Map<String, dynamic>.from(item);
+      }
+    }
+    return null;
+  }
+
+  PlaybackSource? _extractWorkerSource(Map<String, dynamic> value) {
+    final url = _firstString(value, [
+      'ready_to_use_link',
+      'mpd_url',
+      'm3u8_url',
+      'hls_url',
+      'stream_url',
+      'streamUrl',
+      'channel_url',
+      'url',
+      'link',
+    ]);
+    if (url == null || url.isEmpty) return null;
+
+    final headers = <String, String>{'User-Agent': _mobileChromeUa};
+    final cookie = _firstString(value, ['cookie', 'Cookie']);
+    if (cookie != null && cookie.isNotEmpty) headers['Cookie'] = cookie;
+
+    final nested = <Map>[
+      if (value['play_data'] is Map) value['play_data'] as Map,
+      if (value['playData'] is Map) value['playData'] as Map,
+      if (value['playback'] is Map) value['playback'] as Map,
+      if (value['stream'] is Map) value['stream'] as Map,
+      if (value['source'] is Map) value['source'] as Map,
+      if (value['mpd_data'] is Map) value['mpd_data'] as Map,
+    ];
+
+    String? keyId = _firstString(value, ['keyId', 'kid']);
+    String? key = _firstString(value, ['key']);
+    String? allKeys = _firstString(value, ['all_keys', 'allKeys']);
+
+    for (final item in nested) {
+      keyId ??= _firstString(item, ['keyId', 'kid']);
+      key ??= _firstString(item, ['key']);
+      allKeys ??= _firstString(item, ['all_keys', 'allKeys']);
+      final nestedCookie = _firstString(item, ['cookie', 'Cookie']);
+      if (nestedCookie != null && nestedCookie.isNotEmpty) {
+        headers['Cookie'] = nestedCookie;
+      }
+    }
+
+    return PlaybackSource(
+      url: url,
+      headers: headers,
+      clearKeyJson: _workerClearKey(
+        keyId: keyId,
+        key: key,
+        allKeys: allKeys,
+      ),
+    );
+  }
+
+  String? _workerClearKey({
+    String? keyId,
+    String? key,
+    String? allKeys,
+  }) {
+    final entries = <Map<String, String>>[];
+
+    if (allKeys != null && allKeys.isNotEmpty) {
+      for (final token in allKeys.split(RegExp(r'[,;\s]+'))) {
+        final pair = token.split(':');
+        if (pair.length < 2) continue;
+        final kid = _keyBytes(pair[0].trim());
+        final value = _keyBytes(pair.sublist(1).join(':').trim());
+        if (kid != null && value != null) {
+          entries.add({'kty': 'oct', 'kid': kid, 'k': value});
+        }
+      }
+    }
+
+    if (entries.isEmpty && keyId != null && key != null) {
+      final kid = _keyBytes(keyId);
+      final value = _keyBytes(key);
+      if (kid != null && value != null) {
+        entries.add({'kty': 'oct', 'kid': kid, 'k': value});
+      }
+    }
+
+    if (entries.isEmpty) return null;
+    return jsonEncode({'keys': entries, 'type': 'temporary'});
   }
 
   Future<List<TvProgram>> getEpg(int channelId, {int offset = 0}) async {
