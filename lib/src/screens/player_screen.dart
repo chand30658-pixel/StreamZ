@@ -250,7 +250,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       right: 12, top: MediaQuery.sizeOf(context).height * .25,
       child: Container(
         width: 172, padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: const Color(0xE6141925), borderRadius: BorderRadius.circular(14), border: Border.all(color: Colors.white45)),
+        decoration: BoxDecoration(color: const Color(0xE6141925), borderRadius: BorderRadius.circular(14), border: Border.all(color: Colors.white.withValues(alpha: .45))),
         child: Column(children: [
           const Align(alignment: Alignment.centerLeft, child: Text('Channel # / 0000 Search', style: TextStyle(color: TvColors.cyan, fontSize: 10, fontWeight: FontWeight.bold))),
           const SizedBox(height: 8),
@@ -303,6 +303,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
               borderRadius: BorderRadius.circular(6),
               child: image == null ? const ColoredBox(color: Color(0xFF161D2B), child: Icon(Icons.tv, size: 44, color: Colors.white54))
                 : Image.network(image, fit: BoxFit.fill, errorBuilder: (_,__,___) => const ColoredBox(color: Color(0xFF161D2B), child: Icon(Icons.tv, size: 44, color: Colors.white54))),
+            ),
           )),
           Expanded(child: Column(children: [
             _headerBar(channel),
@@ -374,7 +375,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   Widget _buildError() => Center(child: Container(
     constraints: const BoxConstraints(maxWidth: 460), padding: const EdgeInsets.all(22),
-    decoration: BoxDecoration(color: Colors.black.withValues(alpha: .88), borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white35)),
+    decoration: BoxDecoration(color: Colors.black.withValues(alpha: .88), borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white.withValues(alpha: .35))),
     child: Column(mainAxisSize: MainAxisSize.min, children: [
       const Icon(Icons.error_outline, color: Colors.redAccent, size: 44), const SizedBox(height: 10),
       Text(_error!, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
