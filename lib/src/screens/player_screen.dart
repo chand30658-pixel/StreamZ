@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -19,7 +18,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
   final TextEditingController _search = TextEditingController();
   List<TvChannel> _channels = const [];
   List<TvProgram> _epg = const [];
-  BetterPlayerController? _player;
+  MethodChannel? _playerChannel;
+  String? _playerUrl;
+  Map<String, String> _playerHeaders = const {};
+  String? _playerClearKey;
   int _index = 0;
   String _dial = '';
   String? _error;
@@ -63,29 +65,16 @@ class _PlayerScreenState extends State<PlayerScreen> {
     final channel = _channels[index];
     setState(() { _index = index; _error = null; _epg = const []; _banner = true; });
     _armHide();
-    _player?.dispose(); _player = null;
+    _playerUrl = null; _playerChannel = null; _playerClearKey = null; _playerHeaders = const {};
 
     try {
       final resolved = await widget.api.resolvePlayback(channel);
       if (resolved.playbackUrl == null) {
         throw StateError('No playable source is available for channel ${channel.id}.');
       }
-      final drm = resolved.clearKeyJson == null ? null : DrmConfiguration(
-        drmType: DrmType.clearKey, clearKey: resolved.clearKeyJson,
-      );
-      final controller = BetterPlayerController(
-        const BetterPlayerConfiguration(
-          autoPlay: true, fit: BoxFit.fill, aspectRatio: 16 / 9,
-          controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false),
-          handleLifecycle: true, autoDispose: false,
-        ),
-        betterPlayerDataSource: BetterPlayerDataSource(
-          DataSourceType.network, resolved.playbackUrl!, liveStream: true,
-          headers: {'Accept': '*/*', ...resolved.playbackHeaders},
-          drmConfiguration: drm, useAsmsTracks: true, useAsmsAudioTracks: true,
-        ),
-      );
-      _player = controller;
+      _playerUrl = resolved.playbackUrl;
+      _playerHeaders = {'Accept': '*/*', ...resolved.playbackHeaders};
+      _playerClearKey = resolved.clearKeyJson;
       if (mounted) setState(() {});
       final epg = await widget.api.getEpg(channel.id);
       if (mounted && _channel?.id == channel.id) setState(() => _epg = epg);
@@ -142,7 +131,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   void _toggleMute() {
     _muted = !_muted;
-    _player?.setVolume(_muted ? 0 : 1);
+    _playerChannel?.invokeMethod('setVolume', {'volume': _muted ? 0.0 : 1.0});
     setState(() {});
     _armHide();
   }
@@ -150,12 +139,24 @@ class _PlayerScreenState extends State<PlayerScreen> {
   void _cycleAspect() {
     _aspect = (_aspect + 1) % 3;
     final fit = _aspect == 0 ? BoxFit.fill : (_aspect == 1 ? BoxFit.contain : BoxFit.cover);
-    _player?.setOverriddenFit(fit);
+    _playerChannel?.invokeMethod('setAspect', {'mode': _aspect});
     setState(() {});
     _armHide();
   }
 
   void _next() { if (_channels.isNotEmpty) _tune((_index + 1) % _channels.length); }
+  void _onPlatformViewCreated(int viewId) {
+    final channel = MethodChannel('streamz-exoplayer/$viewId');
+    _playerChannel = channel;
+    channel.setMethodCallHandler((call) async {
+      if (call.method == 'playerError' && mounted) {
+        setState(() => _error = call.arguments?.toString() ?? 'Playback error');
+      }
+    });
+    channel.invokeMethod('setVolume', {'volume': _muted ? 0.0 : 1.0});
+    channel.invokeMethod('setAspect', {'mode': _aspect});
+  }
+
   void _previous() { if (_channels.isNotEmpty) _tune((_index - 1 + _channels.length) % _channels.length); }
 
   void _onKey(KeyEvent event) {
@@ -187,7 +188,20 @@ class _PlayerScreenState extends State<PlayerScreen> {
           behavior: HitTestBehavior.opaque, onTap: _touch,
           child: Stack(fit: StackFit.expand, children: [
             const ColoredBox(color: Colors.black),
-            if (_player != null) Positioned.fill(child: BetterPlayer(controller: _player!)),
+            if (_playerUrl != null)
+              Positioned.fill(
+                child: AndroidView(
+                  key: ValueKey('exo-${_channel?.id}-$_playerUrl'),
+                  viewType: 'streamz-exoplayer',
+                  creationParams: {
+                    'url': _playerUrl,
+                    'headers': _playerHeaders,
+                    if (_playerClearKey != null) 'clearKeyJson': _playerClearKey,
+                  },
+                  creationParamsCodec: const StandardMessageCodec(),
+                  onPlatformViewCreated: _onPlatformViewCreated,
+                ),
+              ),
             if (_loading) const Center(child: _Loader(label: 'Loading channels…')),
             if (_channel != null && _error == null) _buildTopControls(),
             if (_dial.isNotEmpty) _buildDialOse(),
@@ -439,7 +453,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
   String _time(DateTime value) => DateFormat('hh:mm a').format(value);
 
   @override void dispose() {
-    _dialTimer?.cancel(); _hideTimer?.cancel(); _player?.dispose(); _focus.dispose(); _search.dispose(); super.dispose();
+    _dialTimer?.cancel(); _hideTimer?.cancel(); _playerChannel = null; _focus.dispose(); _search.dispose(); super.dispose();
   }
 }
 
