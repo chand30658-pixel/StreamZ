@@ -337,7 +337,7 @@ class JioApi {
   }
 
   PlaybackSource? _extractWorkerSource(Map<String, dynamic> value) {
-    final url = _firstString(value, [
+    String? url = _firstString(value, [
       'ready_to_use_link',
       'mpd_url',
       'm3u8_url',
@@ -348,15 +348,32 @@ class JioApi {
       'url',
       'link',
     ]);
+    Map? nestedSource;
+    if (url == null || url.isEmpty) {
+      for (final key in ['play_data','playData','playback','stream','source','mpd_data','data']) {
+        if (value[key] is Map) {
+          final nested = value[key] as Map;
+          final nestedUrl = _firstString(nested, [
+            'ready_to_use_link','mpd_url','m3u8_url','hls_url',
+            'stream_url','streamUrl','channel_url','url','link'
+          ]);
+          if (nestedUrl != null && nestedUrl.isNotEmpty) {
+            url = nestedUrl;
+            nestedSource = nested;
+            break;
+          }
+        }
+      }
+    }
     if (url == null || url.isEmpty) return null;
 
     final rawParts = url.split('|');
     final manifestUrl = rawParts.first.trim();
-    final headers = <String, String>{'User-Agent': _mobileChromeUa};
+    final headers = <String, String>{'User-Agent': _mobileChromeUa, 'Origin': 'https://www.jiotv.com', 'Referer': 'https://www.jiotv.com/tv-guide', 'Accept': '*/*'};
     String? pipeDrmScheme;
     String? pipeDrmLicense;
 
-    final cookie = _firstString(value, ['cookie', 'Cookie']);
+    final cookie = _firstString(value, ['cookie', 'Cookie']) ?? _firstString(nestedSource ?? <String, dynamic>{}, ['cookie', 'Cookie']);
     if (cookie != null && cookie.isNotEmpty) headers['Cookie'] = cookie;
 
     if (rawParts.length > 1) {
