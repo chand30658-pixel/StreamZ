@@ -26,27 +26,44 @@ jobs:
       - name: Prepare Android Gradle wrapper
         run: |
           echo "flutter.sdk=$HOME/flutter" > android/local.properties
-          curl -fsSL https://services.gradle.org/distributions/gradle-8.11.1-bin.zip -o /tmp/gradle.zip
+          curl -fsSL https://services.gradle.org/distributions/gradle-9.3.1-bin.zip -o /tmp/gradle.zip
           unzip -q /tmp/gradle.zip -d /tmp/gradle
-          echo "/tmp/gradle/gradle-8.11.1/bin" >> "$GITHUB_PATH"
+          echo "/tmp/gradle/gradle-9.3.1/bin" >> "$GITHUB_PATH"
           cd android
-          gradle wrapper --gradle-version 8.11.1
+          gradle wrapper --gradle-version 9.3.1
           test -f gradlew
           test -f gradle/wrapper/gradle-wrapper.properties
 
       - name: Get packages
         run: flutter pub get
 
-      - name: Check Android embedding
-        run: |
-          echo "Checking host Android activity and manifest..."
-          grep -RInE 'io\.flutter\.app|FlutterApplication|io\.flutter\.plugin\.common\.PluginRegistry' android 2>/dev/null || true
+      - name: Build release APK
+        run: flutter build apk --release --build-number=${{ github.run_number }} --build-name=1.0.0
 
-      - name: Check dependency embedding
+      - name: Prepare release APK
+        id: apk
         run: |
-          echo "Searching pub cache for legacy Flutter v1 Android embedding..."
-          grep -RInE 'io\.flutter\.app|FlutterApplication|io\.flutter\.plugin\.common\.PluginRegistry' "$HOME/.pub-cache/hosted/pub.dev" 2>/dev/null | head -100 || true
-      - name: Build APK with Gradle
+          mkdir -p release
+          cp build/app/outputs/flutter-apk/app-release.apk release/StreamZ-TV-release.apk
+          echo "size=$(du -h release/StreamZ-TV-release.apk | cut -f1)" >> "$GITHUB_OUTPUT"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: StreamZ-TV-apk-${{ github.run_number }}
+          path: release/StreamZ-TV-release.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          cd android
-          ./gradlew assembleRelease -Pflutter.versionCode=${{ github.run_number }} -Pflutter.versionName=1.0.0
+          TAG="v1.0.0-build.${{ github.run_number }}"
+          TITLE="StreamZ TV build ${{ github.run_number }}"
+          gh release create "$TAG" release/StreamZ-TV-release.apk             --title "$TITLE"             --prerelease             --generate-notes             --notes "Automated Android TV APK build from main.
+
+Commit: ${{ github.sha }}
+APK size: ${{ steps.apk.outputs.size }}
+
+Install the APK on an Android TV / Google TV device for testing."
