@@ -29,5 +29,10 @@ jobs:
       - name: Get packages
         run: flutter pub get
 
+      - name: Check Android embedding
+        run: |
+          echo "Searching Android project for legacy Flutter v1 embedding markers..."
+          grep -RInE 'io\.flutter\.app|FlutterApplication|FlutterActivity' android || true
+
       - name: Build APK
         run: flutter build apk --release --build-number=${{ github.run_number }}
