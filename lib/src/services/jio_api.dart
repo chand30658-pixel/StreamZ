@@ -500,7 +500,7 @@ class JioApi {
   }
 
   DateTime? _parseClockTime(String raw) {
-    final match = RegExp(r'^(\\d{1,2}):(\\d{2})(?::(\\d{2}))?').firstMatch(raw);
+    final match = RegExp(r'^(\d{1,2}):(\d{2})(?::(\d{2}))?').firstMatch(raw);
     if (match == null) return null;
     final now = DateTime.now();
     final hour = int.parse(match.group(1)!);
