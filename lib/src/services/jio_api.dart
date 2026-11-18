@@ -350,9 +350,27 @@ class JioApi {
     ]);
     if (url == null || url.isEmpty) return null;
 
+    final rawParts = url.split('|');
+    final manifestUrl = rawParts.first.trim();
     final headers = <String, String>{'User-Agent': _mobileChromeUa};
+    String? pipeDrmScheme;
+    String? pipeDrmLicense;
+
     final cookie = _firstString(value, ['cookie', 'Cookie']);
     if (cookie != null && cookie.isNotEmpty) headers['Cookie'] = cookie;
+
+    if (rawParts.length > 1) {
+      for (final pair in rawParts.skip(1).join('|').split('&')) {
+        final separator = pair.indexOf('=');
+        if (separator <= 0) continue;
+        final key = Uri.decodeComponent(pair.substring(0, separator));
+        final val = Uri.decodeComponent(pair.substring(separator + 1));
+        if (key == 'cookie' && val.isNotEmpty) headers['Cookie'] = val;
+        if (key == 'userAgent' && val.isNotEmpty) headers['User-Agent'] = val;
+        if (key == 'drmScheme') pipeDrmScheme = val;
+        if (key == 'drmLicense') pipeDrmLicense = val;
+      }
+    }
 
     final nested = <Map>[
       if (value['play_data'] is Map) value['play_data'] as Map,
@@ -377,14 +395,20 @@ class JioApi {
       }
     }
 
+    final pipeClearKey = pipeDrmScheme?.toLowerCase() == 'clearkey' &&
+            pipeDrmLicense != null
+        ? _clearKeyJson(pipeDrmLicense)
+        : null;
+
     return PlaybackSource(
-      url: url,
+      url: manifestUrl,
       headers: headers,
-      clearKeyJson: _workerClearKey(
-        keyId: keyId,
-        key: key,
-        allKeys: allKeys,
-      ),
+      clearKeyJson: pipeClearKey ??
+          _workerClearKey(
+            keyId: keyId,
+            key: key,
+            allKeys: allKeys,
+          ),
     );
   }
 
@@ -437,9 +461,9 @@ class JioApi {
     final result = <TvProgram>[];
     for (final raw in rawList) {
       if (raw is! Map) continue;
-      final start = _epoch(raw['startEpoch']);
-      final end = _epoch(raw['endEpoch']);
-      if (start == null || end == null) continue;
+      final start = _epochOrTime(raw['startEpoch'], raw['showtime']);
+      final end = _epochOrTime(raw['endEpoch'], raw['endtime']);
+      if (start == null || end == null || !end.isAfter(start)) continue;
       final title = '${raw['showname'] ?? raw['showtitle'] ?? 'Live Program'}'.trim();
       result.add(TvProgram(
         title: title.isEmpty ? 'Live Program' : title,
@@ -464,6 +488,31 @@ class JioApi {
       number < 10000000000 ? number * 1000 : number,
     );
   }
+  DateTime? _epochOrTime(dynamic epoch, dynamic fallback) {
+    final parsedEpoch = _epoch(epoch);
+    if (parsedEpoch != null) return parsedEpoch;
+
+    final raw = fallback?.toString().trim();
+    if (raw == null || raw.isEmpty) return null;
+    final normalized = raw.replaceAll('Z', '');
+    return DateTime.tryParse(normalized) ??
+        _parseClockTime(normalized);
+  }
+
+  DateTime? _parseClockTime(String raw) {
+    final match = RegExp(r'^(\\d{1,2}):(\\d{2})(?::(\\d{2}))?').firstMatch(raw);
+    if (match == null) return null;
+    final now = DateTime.now();
+    final hour = int.parse(match.group(1)!);
+    final minute = int.parse(match.group(2)!);
+    final second = int.tryParse(match.group(3) ?? '0') ?? 0;
+    var result = DateTime(now.year, now.month, now.day, hour, minute, second);
+    if (result.isBefore(now.subtract(const Duration(hours: 12)))) {
+      result = result.add(const Duration(days: 1));
+    }
+    return result;
+  }
+
 
   String? _logo(String? path) {
     if (path == null || path.isEmpty) return null;
