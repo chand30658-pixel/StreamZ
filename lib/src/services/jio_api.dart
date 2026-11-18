@@ -286,7 +286,7 @@ class JioApi {
   }
 
   Future<TvChannel> resolvePlayback(TvChannel channel) async {
-    if (channel.id >= 1000000 || channel.playbackUrl != null) {
+    if (channel.id >= 1000000) {
       return channel;
     }
 
