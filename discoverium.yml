@@ -1,8 +1,0 @@
-app:
-  name: PluginStream
-  authors: am-abdulmueed
-  category: entertainment
-  description: Android app for streaming and downloading media.
-  icon: https://raw.githubusercontent.com/am-abdulmueed/pluginstream/refs/heads/main/app/src/main/playstore-icon.png
-  releases:
-    url: https://github.com/am-abdulmueed/pluginstream/releases

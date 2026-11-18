@@ -1,1 +1,0 @@
-cd E:\Projects\IN_BUILD\cloudstream\app\build\outputs\apk\prerelease\debug && python -m http.server 1010
