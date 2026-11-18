@@ -12,7 +12,7 @@ class MainActivity : FlutterActivity() {
         flutterEngine
             .platformViewsController
             .registry
-            .registerViewFactory("streamz-exoplayer", StreamzPlayerViewFactory())
+            .registerViewFactory("streamz-exoplayer", StreamzPlayerViewFactory(flutterEngine.dartExecutor.binaryMessenger))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
